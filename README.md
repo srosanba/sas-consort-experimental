@@ -43,11 +43,11 @@ This initial diagram is a throw-away. It's only purpose is to allow us to create
 
 <kbd>![outfile](https://github.com/srosanba/sas-consort-experimental/blob/master/img/outfile.png)</kbd>
 
-Now that we know how tall each of the boxes are, it becomes a simple algebra problem to figure up how much total vertical space the boxes use. We then divide the remaining space up between the rows to equally space the boxes vertically.
+Now that we know the height of each of the boxes, it becomes a simple algebra problem to calculate how much total vertical space the boxes use. We then divide the remaining space up between the rows to equally space the boxes vertically.
 
 <kbd>![bettery](https://github.com/srosanba/sas-consort-experimental/blob/master/img/bettery.png)</kbd>
 
-We also know how wide each of the boxes are, so it is equally as simple to figure up how much total horizontal space the boxes use. We then divide the remaining space up between the columns to equally space the boxes horizontally.
+We also now know the width of each of the boxes, so it is equally as simple to calculate how much total horizontal space the boxes use. We then divide the remaining space up between the columns to equally space the boxes horizontally.
 
 <kbd>![betterx](https://github.com/srosanba/sas-consort-experimental/blob/master/img/betterx.png)</kbd>
 

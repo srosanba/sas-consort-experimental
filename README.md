@@ -16,7 +16,7 @@ As part of 9.4 M3, the options OUTFILE and OUTID were added to the GTL statement
 
 ## Getting Started
 
-The process that I've created to facilitate the initial layout of CONSORT diagrams begins with Excel. This is where you enter your quick and dirty information about the diagram. You need only specify a few key details for each box:
+The process that I've created to facilitate the initial layout of CONSORT diagrams begins with Excel. This is where you enter your quick and dirty information about your diagram. You need only specify a four pieces of information for each box:
 
 1. A numeric `boxId`.
 1. The `row` that the box goes in.
@@ -24,3 +24,33 @@ The process that I've created to facilitate the initial layout of CONSORT diagra
 1. The `roughText` to be displayed in the box.
 
 <kbd>![excel](https://github.com/srosanba/sas-consort-experimental/blob/master/img/excel.png)</kbd>
+
+You'll notice a couple of things about these Excel specifications.
+
+* The `roughText` truly is rough.  
+  * Having roughly the right length of text strings is much more important than having the exact wording.
+* The position of each box is specified with a `row` and `col` pair.  
+  * The integer values correspond to the boxes that form the main structure of the diagram. Use integers for boxes that are meant to line up with other boxes.  
+  * The non-integer values are for the fiddly bits of the diagram that don't fit nicely into a row or column. Use non-integer values to communicate that a box goes *somewhere over there*.
+
+## Rough Plot
+
+The SAS program reads in the Excel file and creates a really rough draft layout using the `row` and `col` values.
+
+<kbd>![rough](https://github.com/srosanba/sas-consort-experimental/blob/master/img/rough.png)</kbd>
+
+This initial diagram is a throw-away. It's only purpose is to allow us to create the OUTFILE which contains the information about the width and height of each of the outlines that were drawn.
+
+<kbd>![outfile](https://github.com/srosanba/sas-consort-experimental/blob/master/img/outfile.png)</kbd>
+
+Now that we know how tall each of the boxes are, it becomes a simple algebra problem to figure up how much total vertical space the boxes use. We then divide the remaining space up equally between the rows to equally space the boxes vertically.
+
+<kbd>![bettery](https://github.com/srosanba/sas-consort-experimental/blob/master/img/bettery.png)</kbd>
+
+We also know how wide each of the boxes are, it is equally as simple to figure up how much total horizontal space the boxes use. We then divide the remaining space up equally between the columns to equally space the boxes horizontally.
+
+<kbd>![betterx](https://github.com/srosanba/sas-consort-experimental/blob/master/img/betterx.png)</kbd>
+
+Now that we know roughly where the boxes should go, we need to be able to incorporate this information back into the SGPLOT-based process for generating CONSORT diagrams. Fortunately, the SAS program ends with the creation of a `putstring` variable, the content of which can be easily copy/pasted into the `datalines` of the emptyBoxes data step in the SGPLOT-based CONSORT diagram program.
+
+<kbd>![putstring](https://github.com/srosanba/sas-consort-experimental/blob/master/img/putstring.png)</kbd>

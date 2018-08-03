@@ -61,7 +61,7 @@ ods graphics /
    ;
 
 ods listing 
-   gpath="&path" 
+   gpath="&path/img" 
    ;
    
 proc template;
@@ -175,7 +175,7 @@ data rough30;
    if _N_ = 1 then
       set trow10;
    array br {&maxrow} row1-row&maxrow;
-   do i = 1 to &ydim-1;
+   do i = 1 to &maxrow;
       if row = i then
          bettery = br[i];
    end;
@@ -199,7 +199,7 @@ ods graphics /
    ;
 
 ods listing 
-   gpath="&path" 
+   gpath="&path/img" 
    ;
    
 proc template;
@@ -230,7 +230,6 @@ proc template;
                LegendLabel="texty" NAME="TEXT" 
                position=center splitpolicy=splitalways SplitChar="~" 
                Display=(Outline) 
-               OutFile="&path/rough.csv" OutID=boxId
                ;
          endlayout;
       endgraph;
@@ -329,7 +328,7 @@ ods graphics /
    ;
 
 ods listing 
-   gpath="&path" 
+   gpath="&path/img" 
    ;
    
 proc template;
@@ -360,7 +359,6 @@ proc template;
                LegendLabel="texty" NAME="TEXT" 
                position=center splitpolicy=splitalways SplitChar="~" 
                Display=(Outline) 
-               OutFile="&path/rough.csv" OutID=boxId
                ;
          endlayout;
       endgraph;
@@ -400,7 +398,7 @@ ods graphics /
    ;
 
 ods listing 
-   gpath="&path" 
+   gpath="&path/img" 
    ;
    
 proc template;
@@ -431,7 +429,6 @@ proc template;
                LegendLabel="texty" NAME="TEXT" 
                position=bottom splitpolicy=splitalways SplitChar="~" 
                Display=(Outline) 
-               OutFile="&path/rough.csv" OutID=boxId
                ;
          endlayout;
       endgraph;
@@ -446,7 +443,7 @@ run;
 *---------- copy from log to kick-start SGPLOT approach ----------;
 *--------------------------------------------------------------------------------;
 
-data _null_;
+data putstring;
    set final;
    format boxId 2. finalx finaly finalwidth finalheight 6.2;
    length putstring $100;
@@ -462,4 +459,5 @@ data _null_;
       ,put(finalheight,6.2)
       );
    put putstring;
+   keep putstring;
 run;

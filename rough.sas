@@ -16,6 +16,8 @@ proc import
    sheet = "rowCol";
 run;
 
+*--- largest row/col values ---;
+
 proc sql noprint;
    select   max(row)
    into     :maxrow
@@ -33,11 +35,15 @@ proc sql noprint;
    %put &=maxcol;
 quit;
 
+*--- position each row/col as a percent of the max ---;
+
 data rough10;
    set rough00;
    roughx = 100 * (col/(&maxcol+1));
    roughy = 100 * (row/(&maxrow+1));
 run;
+
+*--- build a 0-100 canvas ---;
 
 data dummy10;
    dummyx = 0;
@@ -51,6 +57,8 @@ run;
 data plot10;
    set rough10 dummy10;
 run;
+
+*--- the plotting business ---;
 
 ods graphics / 
    reset=all
@@ -120,6 +128,8 @@ data rough20;
    by boxId;
 run;
 
+*--- focus on integer row values ---;
+
 proc sql noprint;
    select   distinct row
    into     :rows separated by ' '
@@ -128,6 +138,8 @@ proc sql noprint;
    ;
    %put &=rows;
 quit;
+
+*--- maximum space used in each row ---;
 
 proc sql noprint;
    create   table maxdataheight as
@@ -147,6 +159,8 @@ proc sort data=rough20 out=rough25;
    by row col;
 run;
 
+*--- calculate integer row positions ---;
+
 data row10;
    set rough25;
    by row;
@@ -163,6 +177,8 @@ data row10;
    end;
    keep gapheight row bettery;
 run;
+
+*--- use integer positions to interpolate non-integer positions ---;
 
 proc transpose data=row10 out=trow10 prefix=row;
    by gapheight;
@@ -189,6 +205,8 @@ run;
 data plot30;
    set rough30 dummy10;
 run;
+
+*--- the plotting business ---;
 
 ods graphics / 
    reset=all
@@ -244,6 +262,8 @@ run;
 *---------- use rough coordinates to refine x positioning ----------;
 *--------------------------------------------------------------------------------;
 
+*--- focus on integer col values ---;
+
 proc sql noprint;
    select   distinct col
    into     :cols separated by ' '
@@ -252,6 +272,8 @@ proc sql noprint;
    ;
    %put &=cols;
 quit;
+
+*--- maximum spaces used in each col ---;
 
 proc sql noprint;
    create   table maxdatawidth as
@@ -271,6 +293,8 @@ proc sort data=rough30 out=rough35;
    by col row;
 run;
 
+*--- calculate integer col positions ---;
+
 data col10;
    set rough35;
    by col;
@@ -287,6 +311,8 @@ data col10;
    end;
    keep gapwidth col betterx;
 run;
+
+*--- use integer positions to interpolate non-integer positions ---;
 
 proc transpose data=col10 out=tcol10 prefix=col;
    by gapwidth;
@@ -318,6 +344,8 @@ run;
 data plot40;
    set rough40 dummy10;
 run;
+
+*--- the plotting business ---;
 
 ods graphics / 
    reset=all
@@ -377,6 +405,9 @@ proc sort data=rough40 out=final;
    by boxId;
 run;
 
+*--- previous work utilizes CENTER positioning for each of calculations ---;
+*--- need to modify to fit into BOTTOM positioning paradigm of helper macros ---;
+
 data final;
    set final;
    finalx = round(betterx, .01);
@@ -388,6 +419,8 @@ run;
 data plotfinal;
    set final dummy10;
 run;
+
+*--- extraneous final look ---;
 
 ods graphics / 
    reset=all
@@ -440,7 +473,7 @@ run;
 
 
 *--------------------------------------------------------------------------------;
-*---------- copy from log to kick-start SGPLOT approach ----------;
+*---------- copy from putstring to kick-start helper macro approach ----------;
 *--------------------------------------------------------------------------------;
 
 data putstring;

@@ -39,15 +39,15 @@ The SAS program reads in the Excel file and creates a really rough draft layout 
 
 <kbd>![rough](https://github.com/srosanba/sas-consort-experimental/blob/master/img/rough.png)</kbd>
 
-This initial diagram is a throw-away. It's only purpose is to allow us to create the OUTFILE which contains the information about the width and height of each of the outlines that were drawn.
+This initial diagram is a throw-away. It's only purpose is to allow us to create the OUTFILE which contains the information about the width and height of each of the outlines that were drawn. The OUTFILE is created as a CSV, which when viewed in Excel looks like this.
 
 <kbd>![outfile](https://github.com/srosanba/sas-consort-experimental/blob/master/img/outfile.png)</kbd>
 
-Now that we know the height of each of the boxes, it becomes a simple algebra problem to calculate how much total vertical space the boxes use. We then divide the remaining space up between the rows to equally space the boxes vertically.
+Now that we know the height of each of the boxes (`DATAHEIGHT`), it becomes a simple algebra problem to calculate how much total vertical space the boxes use. We then divide the remaining space up between the rows to equally space the boxes vertically.
 
 <kbd>![bettery](https://github.com/srosanba/sas-consort-experimental/blob/master/img/bettery.png)</kbd>
 
-We also now know the width of each of the boxes, so it is equally as simple to calculate how much total horizontal space the boxes use. We then divide the remaining space up between the columns to equally space the boxes horizontally.
+We also now know the width of each of the boxes (`DATAWIDTH`), so it is equally as simple to calculate how much total horizontal space the boxes use. We then divide the remaining space up between the columns to equally space the boxes horizontally.
 
 <kbd>![betterx](https://github.com/srosanba/sas-consort-experimental/blob/master/img/betterx.png)</kbd>
 

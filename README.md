@@ -16,11 +16,11 @@ As part of 9.4 M3, the options OUTFILE and OUTID were added to the GTL statement
 
 ## How It Works
 
-The process that I've created to facilitate the initial layout of CONSORT diagrams begins with Excel. This is where you enter your quick and dirty information about your diagram. You need only specify a four pieces of information for each box:
+The process that I've created to facilitate the initial layout of CONSORT diagrams begins with Excel. This is where you enter your quick and dirty information about your diagram. You need only specify four pieces of information for each box:
 
 1. A numeric `boxId`.
 1. The `row` that the box goes in.
-1. The `col` that the box goes in.
+1. The `col`(umn) that the box goes in.
 1. The `roughText` to be displayed in the box.
 
 <kbd>![excel](https://github.com/srosanba/sas-consort-experimental/blob/master/img/excel.png)</kbd>

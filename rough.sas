@@ -1,6 +1,7 @@
 %let path = H:\GitHub\srosanba\sas-consort-experimental;
 %let width = 8;
 %let height = 6;
+%let textsize = 9;
 
 
 *--------------------------------------------------------------------------------;
@@ -99,7 +100,7 @@ proc template;
             TextPlot X=roughx Y=roughy text=roughText / 
                LegendLabel="texty" NAME="TEXT" 
                position=center splitpolicy=splitalways SplitChar="~" 
-               Display=(Outline) 
+               Display=(Outline) textattrs=(size=&textsize)
                OutFile="&path/rough.csv" OutID=boxId
                ;
          endlayout;
@@ -247,7 +248,7 @@ proc template;
             TextPlot X=roughx Y=bettery text=roughText / 
                LegendLabel="texty" NAME="TEXT" 
                position=center splitpolicy=splitalways SplitChar="~" 
-               Display=(Outline) 
+               Display=(Outline) textattrs=(size=&textsize)
                ;
          endlayout;
       endgraph;
@@ -386,7 +387,7 @@ proc template;
             TextPlot X=betterx Y=bettery text=roughText / 
                LegendLabel="texty" NAME="TEXT" 
                position=center splitpolicy=splitalways SplitChar="~" 
-               Display=(Outline) 
+               Display=(Outline) textattrs=(size=&textsize) 
                ;
          endlayout;
       endgraph;
@@ -461,7 +462,7 @@ proc template;
             TextPlot X=finalx Y=finaly text=roughText / 
                LegendLabel="texty" NAME="TEXT" 
                position=bottom splitpolicy=splitalways SplitChar="~" 
-               Display=(Outline) 
+               Display=(Outline) textattrs=(size=&textsize) 
                ;
          endlayout;
       endgraph;

@@ -55,7 +55,7 @@ Now that we know roughly where the boxes should go, we need to be able to incorp
 
 <kbd>![putstring](https://github.com/srosanba/sas-consort-experimental/blob/master/img/putstring.png)</kbd>
 
-To see the `putstring` values in action, check out the program `smooth.sas` in this repository. The smooth program makes use some that were originally developed in the [sas-consort-sgplot](https://github.com/srosanba/sas-consort-sgplot) repository. This repository's version of the [macros](https://github.com/srosanba/sas-consort-experimental/tree/master/macros) have been modified ever so slightly to better fit with the top-down approach to y values (the original SGPLOT-based approach used a bottom-up approach). 
+To see the `putstring` values in action, check out the program `smooth.sas` in this repository. The smooth program makes use of some macros that were originally developed in the [sas-consort-sgplot](https://github.com/srosanba/sas-consort-sgplot) repository. The current repository's versions of the [macros](https://github.com/srosanba/sas-consort-experimental/tree/master/macros) have been modified ever so slightly from the original to better fit with this repository's top-down approach to y values (the original SGPLOT-based approach used a bottom-up approach to y values). 
 
 ## Conclusion
 
